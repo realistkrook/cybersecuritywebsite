@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development & Cybersecurity Education</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic Material Icons styling in case the CSS file doesn't have it */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            margin-right: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="top-bar">
+        <a class="logo" href="#hero">
+            <span class="material-symbols-outlined">lock</span> CyberSecurity Education
+        </a>
+        <nav class="top-nav" aria-label="Main navigation">
+            <a href="#about">About</a>
+            <a href="#attack-vectors">Attack Vectors</a>
+            <a href="#security">Security Threats</a>
+            <a href="#bestpractices">Best Practices</a>
+            <a href="#examples">Examples</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-text">
+                <h1>Learn Web Development & Cybersecurity</h1>
+                <p>
+                    Discover how to build secure websites while understanding the threats they face. 
+                    This educational resource covers essential web development skills alongside critical 
+                    cybersecurity concepts that protect users and data online.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-outline" href="#attack-vectors">Attack Vectors</a>
+                    <a class="btn btn-rounded" href="#security">Security Threats</a>
+                    <a class="btn btn-solid" href="#bestpractices">Best Practices</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="about-text">
+                <h2>Why Cybersecurity Matters in Web Development</h2>
+                <p>
+                    Every website on the internet faces security threats. From personal blogs to major 
+                    e-commerce platforms, understanding cybersecurity is essential for any web developer. 
+                    This site teaches you both the technical skills to build websites AND the security 
+                    knowledge to protect them.
+                </p>
+                <p>
+                    By learning web development alongside security concepts, you'll understand not just 
+                    <em>how</em> to build features, but <em>why</em> certain practices are dangerous and 
+                    <em>how</em> to implement them safely. This integrated approach creates better, 
+                    more security-conscious developers.
+                </p>
+            </div>
+            <div class="about-card">
+                <h3>
+                    <span class="material-symbols-outlined">lightbulb</span> Key Insight
+                </h3>
+                <p>
+                    According to cybersecurity research, over 43% of cyberattacks target small websites 
+                    and applications. Many of these attacks exploit simple vulnerabilities that could have 
+                    been prevented with basic security knowledge. Learning secure development practices 
+                    from the start is crucial for protecting users and data.
+                </p>
+            </div>
+        </section>
+
+        <!-- Attack Vectors Section -->
+        <section id="attack-vectors" class="security-section">
+            <h2>
+                <span class="material-symbols-outlined">security</span> Web Attack Vectors
+            </h2>
+            <p class="section-intro">Understanding common attack methods helps build stronger defenses</p>
+            
+            <div class="security-grid">
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">code</span>
+                    </div>
+                    <h3>Injection Attacks</h3>
+                    <p><strong>The Threat:</strong> Attackers insert malicious code into trusted applications through unvalidated user inputs. This includes SQL injection, command injection, and LDAP injection.</p>
+                    <p><strong>The Defense:</strong> Input validation, parameterized queries, stored procedures, and least privilege principles.</p>
+                    <code class="code-example">// Vulnerable code ❌
+query("SELECT * FROM users WHERE name='" 
+  + userName + "'");
+
+// Secure code ✅
+query("SELECT * FROM users WHERE name=?", 
+  [userName]);</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">vpn_key</span>
+                    </div>
+                    <h3>Broken Authentication</h3>
+                    <p><strong>The Threat:</strong> Flaws in authentication mechanisms allow attackers to compromise passwords, keys, or session tokens to assume users' identities.</p>
+                    <p><strong>The Defense:</strong> Multi-factor authentication, strong password policies, secure session management.</p>
+                    <code class="code-example">// Weak authentication ❌
+if (password === storedPassword) // Simple comparison
+
+// Strong authentication ✅
+if (await bcrypt.compare(password, storedHash) && 
+    verifyMFA(token))</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">manage_accounts</span>
+                    </div>
+                    <h3>Broken Access Control</h3>
+                    <p><strong>The Threat:</strong> Restrictions on authenticated users are not properly enforced, allowing attackers to access unauthorized functionality or data.</p>
+                    <p><strong>The Defense:</strong> Role-based access control, deny by default, regular access reviews.</p>
+                    <code class="code-example">// Insecure reference ❌
+app.get('/api/:id', (req, res) => {
+  getDoc(req.params.id); // No check!
+}
+
+// Proper control ✅
+if (userHasAccess(user, docId)) {
+  getDoc(docId);
+}</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">memory</span>
+                    </div>
+                    <h3>Security Misconfigurations</h3>
+                    <p><strong>The Threat:</strong> Improper security configuration of applications, frameworks, servers, and platforms leads to vulnerabilities.</p>
+                    <p><strong>The Defense:</strong> Secure configuration standards, automated verification, minimal platform usage.</p>
+                    <code class="code-example">// Server misconfiguration ❌
+app.use(express.errorHandler({ 
+  dumpExceptions: true 
+}));
+
+// Proper configuration ✅
+if (process.env.NODE_ENV === 'production') {
+  // Safe error handling
+}</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">infected</span>
+                    </div>
+                    <h3>Cross-Site Scripting (XSS)</h3>
+                    <p><strong>The Threat:</strong> Attackers inject malicious scripts into websites viewed by users, allowing theft of session tokens, redirection to malicious sites, and more.</p>
+                    <p><strong>The Defense:</strong> Input sanitization, Content Security Policy, output encoding.</p>
+                    <code class="code-example">// XSS vulnerability ❌
+element.innerHTML = userInput;
+
+// Safe alternative ✅
+element.textContent = userInput;
+// Add CSP headers too</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">lock_clock</span>
+                    </div>
+                    <h3>Outdated Components</h3>
+                    <p><strong>The Threat:</strong> Using components with known vulnerabilities gives attackers well-documented exploitation paths into your application.</p>
+                    <p><strong>The Defense:</strong> Regular updates, vulnerability scanning, dependency checking.</p>
+                    <code class="code-example">// Dependency management ❌
+// Outdated libraries with vulnerabilities
+
+// Security scanning ✅
+npm audit fix
+npm update
+// Enable dependabot alerts</code>
+                </article>
+            </div>
+        </section>
+
+        <!-- Security Section -->
+        <section id="security" class="security-section">
+            <h2>
+                <span class="material-symbols-outlined">shield</span> Web Security Essentials
+            </h2>
+            <p class="section-intro">Learn how to protect your websites from common vulnerabilities</p>
+            
+            <div class="security-grid">
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">lock_open</span>
+                    </div>
+                    <h3>XSS (Cross-Site Scripting)</h3>
+                    <p><strong>The Threat:</strong> Attackers inject malicious JavaScript into your website, 
+                       stealing user data or hijacking sessions.</p>
+                    <p><strong>The Defense:</strong> Always sanitize user inputs, escape HTML characters, 
+                       and use Content Security Policy (CSP) headers.</p>
+                    <code class="code-example">// Bad: innerHTML with user input ❌
+element.innerHTML = userInput;
+
+// Good: textContent for text ✅
+element.textContent = userInput;</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">bug_report</span>
+                    </div>
+                    <h3>CSS Injection</h3>
+                    <p><strong>The Threat:</strong> Malicious CSS can be used to steal data, perform 
+                       clickjacking, or hide phishing content.</p>
+                    <p><strong>The Defense:</strong> Validate all style inputs, use CSP, and never allow 
+                       user-controlled inline styles without sanitization.</p>
+                    <code class="code-example">/* Dangerous: User-controlled CSS */
+style="background: url('evil.com/steal')"
+
+/* Safe: Predefined classes only */
+className="safe-preset-style"</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">https</span>
+                    </div>
+                    <h3>HTTPS & Encryption</h3>
+                    <p><strong>The Threat:</strong> Unencrypted HTTP connections expose user data to 
+                       eavesdropping and man-in-the-middle attacks.</p>
+                    <p><strong>The Defense:</strong> Always use HTTPS, enable HSTS headers, and ensure 
+                       all resources (images, scripts) load over secure connections.</p>
+                    <code class="code-example">&lt;!-- Bad: Mixed content ❌ --&gt;
+&lt;img src="http://site.com/img.jpg"&gt;
+
+&lt;!-- Good: HTTPS everywhere ✅ --&gt;
+&lt;img src="https://site.com/img.jpg"&gt;</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">ads_click</span>
+                    </div>
+                    <h3>Clickjacking</h3>
+                    <p><strong>The Threat:</strong> Attackers overlay invisible iframes to trick users into 
+                       clicking malicious links while thinking they're interacting with your site.</p>
+                    <p><strong>The Defense:</strong> Use X-Frame-Options or frame-ancestors CSP directive 
+                       to prevent your site from being embedded.</p>
+                    <code class="code-example">/* HTTP Header Protection */
+X-Frame-Options: DENY
+Content-Security-Policy: 
+  frame-ancestors 'none';</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">edit_note</span>
+                    </div>
+                    <h3>Input Validation</h3>
+                    <p><strong>The Threat:</strong> Unvalidated inputs can lead to XSS, SQL injection, 
+                       and other injection attacks.</p>
+                    <p><strong>The Defense:</strong> Validate on both client AND server side. Use 
+                       whitelists, not blacklists. Never trust user input.</p>
+                    <code class="code-example">// Client-side validation
+&lt;input type="email" required 
+  pattern="[a-z0-9._%+-]+@..."&gt;
+
+// Server validation is REQUIRED!</code>
+                </article>
+
+                <article class="security-card">
+                    <div class="security-icon">
+                        <span class="material-symbols-outlined">cookie</span>
+                    </div>
+                    <h3>Secure Cookies</h3>
+                    <p><strong>The Threat:</strong> Insecure cookies can be stolen via XSS or intercepted 
+                       over unencrypted connections.</p>
+                    <p><strong>The Defense:</strong> Set HttpOnly, Secure, and SameSite flags on all 
+                       sensitive cookies to prevent common attacks.</p>
+                    <code class="code-example">// Secure cookie settings
+Set-Cookie: sessionId=abc123; 
+  HttpOnly; Secure; 
+  SameSite=Strict;</code>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Best Practices Section -->
+        <section id="bestpractices" class="bestpractices">
+            <h2>
+                <span class="material-symbols-outlined">check_circle</span> Web Development Best Practices
+            </h2>
+            <p class="section-intro">Essential practices for building secure, accessible, and performant websites</p>
+            
+            <div class="bestpractices-grid">
+                <article class="practice-card">
+                    <div class="practice-icon">
+                        <span class="material-symbols-outlined">lock</span>
+                    </div>
+                    <h3>Always Sanitize User Input</h3>
+                    <p>
+                        Never trust data from users. Always validate and sanitize inputs on both client 
+                        and server side to prevent injection attacks like XSS and SQL injection.
+                    </p>
+                    <div class="practice-example">
+                        <strong>Example:</strong> Use input validation, escape special characters, and 
+                        employ Content Security Policy headers.
+                    </div>
+                </article>
+
+                <article class="practice-card">
+                    <div class="practice-icon">
+                        <span class="material-symbols-outlined">public</span>
+                    </div>
+                    <h3>Use HTTPS Everywhere</h3>
+                    <p>
+                        Encrypt all connections with HTTPS to protect data in transit. This prevents 
+                        man-in-the-middle attacks and ensures user privacy.
+                    </p>
+                    <div class="practice-example">
+                        <strong>Example:</strong> Obtain SSL certificates, enable HSTS headers, and 
+                        ensure all resources load over secure connections.
+                    </div>
+                </article>
+
+                <article class="practice-card">
+                    <div class="practice-icon">
+                        <span class="material-symbols-outlined">accessibility</span>
+                    </div>
+                    <h3>Design for Accessibility</h3>
+                    <p>
+                        Make websites usable for everyone by following WCAG guidelines. Use semantic HTML, 
+                        proper ARIA labels, and ensure keyboard navigation works.
+                    </p>
+                    <div class="practice-example">
+                        <strong>Example:</strong> Add alt text to images, use proper heading hierarchy, 
+                        and ensure sufficient color contrast.
+                    </div>
+                </article>
+
+                <article class="practice-card">
+                    <div class="practice-icon">
+                        <span class="material-symbols-outlined">smartphone</span>
+                    </div>
+                    <h3>Mobile-First Development</h3>
+                    <p>
+                        Start with mobile designs and progressively enhance for larger screens. This ensures 
+                        good performance on all devices and creates better user experiences.
+                    </p>
+                    <div class="practice-example">
+                        <strong>Example:</strong> Use min-width media queries, flexible layouts, and 
+                        test on real devices regularly.
+                    </div>
+                </article>
+
+                <article class="practice-card">
+                    <div class="practice-icon">
+                        <span class="material-symbols-outlined">speed</span>
+                    </div>
+                    <h3>Optimize Performance</h3>
+                    <p>
+                        Fast websites provide better user experiences and rank higher in search results. 
+                        Optimize images, minimize CSS/JS, and use lazy loading.
+                    </p>
+                    <div class="practice-example">
+                        <strong>Example:</strong> Compress images, minify code, use modern formats like 
+                        WebP, and implement caching strategies.
+                    </div>
+                </article>
+
+                <article class="practice-card">
+                    <div class="practice-icon">
+                        <span class="material-symbols-outlined">code</span>
+                    </div>
+                    <h3>Write Semantic HTML</h3>
+                    <p>
+                        Use HTML elements according to their meaning, not their appearance. This improves 
+                        accessibility, SEO, and makes code more maintainable.
+                    </p>
+                    <div class="practice-example">
+                        <strong>Example:</strong> Use &lt;nav&gt; for navigation, &lt;article&gt; for content, 
+                        &lt;button&gt; for actions, not &lt;div&gt; for everything.
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="gallery">
+            <h2>
+                <span class="material-symbols-outlined">photo_library</span> Practical Examples
+            </h2>
+            <p class="section-intro">Visual demonstrations of the skills and security concepts covered</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200?text=CSS+Styling" alt="CSS styling with borders and colors">
+                    <p class="gallery-caption">Skill 1: CSS Styling Techniques</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200?text=Hover+Effects" alt="Interactive hover state demonstrations">
+                    <p class="gallery-caption">Skill 3: Hover Interactions</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200?text=Flexbox+Layout" alt="Flexbox layout example">
+                    <p class="gallery-caption">Skill 5: Flexbox Layouts</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200?text=Grid+Layout" alt="CSS Grid layout example">
+                    <p class="gallery-caption">Skill 5: CSS Grid Systems</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200?text=Responsive" alt="Responsive design across devices">
+                    <p class="gallery-caption">Skill 6: Responsive Breakpoints</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://placehold.co/300x200?text=Security" alt="Security implementation example">
+                    <p class="gallery-caption">Security: Protected Website</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="timeline">
+            <h2>
+                <span class="material-symbols-outlined">menu_book</span> Learning Resources & References
+            </h2>
+            <div class="timeline-track" role="list">
+                <article class="timeline-card" role="listitem">
+                    <div class="milestone-icon">
+                        <span class="material-symbols-outlined">article</span>
+                    </div>
+                    <h3>MDN Web Docs</h3>
+                    <p>Mozilla Developer Network provides comprehensive documentation for HTML, CSS, and JavaScript with security guidance.</p>
+                </article>
+                <article class="timeline-card" role="listitem">
+                    <div class="milestone-icon">
+                        <span class="material-symbols-outlined">security</span>
+                    </div>
+                    <h3>OWASP Foundation</h3>
+                    <p>Open Web Application Security Project offers free resources on web security, including the Top 10 vulnerabilities list.</p>
+                </article>
+                <article class="timeline-card" role="listitem">
+                    <div class="milestone-icon">
+                        <span class="material-symbols-outlined">school</span>
+                    </div>
+                    <h3>W3C Standards</h3>
+                    <p>World Wide Web Consortium sets web standards for HTML, CSS, and accessibility guidelines (WCAG).</p>
+                </article>
+                <article class="timeline-card" role="listitem">
+                    <div class="milestone-icon">
+                        <span class="material-symbols-outlined">vpn_key</span>
+                    </div>
+                    <h3>CSP Guide</h3>
+                    <p>Content Security Policy helps prevent XSS attacks by controlling which resources can load on your website.</p>
+                </article>
+                <article class="timeline-card" role="listitem">
+                    <div class="milestone-icon">
+                        <span class="material-symbols-outlined">speed</span>
+                    </div>
+                    <h3>Performance Tools</h3>
+                    <p>Lighthouse, PageSpeed Insights, and WebPageTest help analyze and optimize website performance.</p>
+                </article>
+                <article class="timeline-card" role="listitem">
+                    <div class="milestone-icon">
+                        <span class="material-symbols-outlined">accessibility</span>
+                    </div>
+                    <h3>Accessibility Testing</h3>
+                    <p>WAVE, axe DevTools, and screen readers help ensure websites are accessible to all users.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Web Development & Cybersecurity Education</p>
+        <p class="footer-note">
+            This educational resource demonstrates the 8 core web development skills alongside 
+            critical cybersecurity concepts. Built for Digital Technologies assessment.
+        </p>
+        <p class="footer-links">
+            <a href="#attack-vectors">Attack Vectors</a> • 
+            <a href="#security">Security Threats</a> • 
+            <a href="#bestpractices">Best Practices</a> • 
+            <a href="#examples">Examples</a>
+        </p>
+        <p class="footer-tech">
+            <span class="material-symbols-outlined">lock</span> Cybersecurity Education: Attack Vectors • Security Threats • 
+            Best Practices • Secure Development • Protection Methods
+        </p>
+    </footer>
+</body>
+</html>
