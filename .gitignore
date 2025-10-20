@@ -1,0 +1,4 @@
+.gemini/
+gha-creds-*.json
+# Ignore GitHub configuration/workflows
+.github/

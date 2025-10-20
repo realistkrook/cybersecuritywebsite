@@ -141,16 +141,54 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background: var(--bg-secondary);
-  padding: 2rem;
+  position: relative;
+  padding: 4rem 2.5rem;
+  min-height: 420px;
   border-radius: 1.5rem;
   box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.4);
+  /* Prefer AVIF where supported, fall back to WebP */
+  background-image: image-set(url('media/cyber_security_1-large.avif') type('image/avif') 1x, url('media/cyber_security_1-large.webp') type('image/webp') 1x);
+  background-size: cover;
+  background-position: center center;
+  color: var(--text-primary);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Responsive hero background fallbacks: use smaller images on smaller viewports */
+@media (max-width: 900px) {
+  .hero {
+    background-image: image-set(url('media/cyber_security_1-medium.avif') type('image/avif') 1x, url('media/cyber_security_1-medium.webp') type('image/webp') 1x);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    background-image: image-set(url('media/cyber_security_1-small.avif') type('image/avif') 1x, url('media/cyber_security_1-small.webp') type('image/webp') 1x);
+  }
+}
+
+.hero-overlay {
+  /* overlay removed; kept for backward compatibility */
+  display: none;
 }
 
 .hero-text {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+  /* localized translucent panel so text is readable without covering the whole hero */
+  background: rgba(2, 6, 23, 0.55);
+  backdrop-filter: blur(6px);
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  max-width: 760px;
+  margin: 0; /* restore default flow (left/top) */
+  align-self: flex-start;
+  text-align: left;
+  flex: 1 1 0;
 }
 
 .hero h1 {
