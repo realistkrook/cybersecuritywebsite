@@ -1,27 +1,25 @@
 # Advanced Techniques Checklist
 
-This checklist lists advanced web development and frontend techniques used in this website or recommended to add. Mark items you have implemented.
-
 - [x] CSS hover effects (transitions, transform, hover states)
-- [ ] CSS variables (custom properties) for theme and colors
-- [ ] Responsive typography using clamp()
-- [ ] Flexbox layout for one-dimensional layouts
-- [ ] CSS Grid for two-dimensional responsive layouts
-- [ ] Backdrop-filter translucency (frosted glass effect)
-- [ ] Hero background optimization (webp/avif, responsive images)
-- [ ] Preload critical images and preconnect to font providers
+- [x] CSS variables (custom properties) for theme and colors
+- [x] Responsive typography using clamp()
+- [x] Flexbox layout for one-dimensional layouts
+- [x] CSS Grid for two-dimensional responsive layouts
+- [x] Backdrop-filter translucency (frosted glass effect)
+- [x] Hero background optimization (webp/avif, responsive images)
+- [x] Preload critical images and preconnect to font providers
 - [ ] Lazy-load non-critical images with loading="lazy"
-- [ ] ARIA roles and accessibility improvements
+- [x] ARIA roles and accessibility improvements
 - [ ] Content Security Policy (CSP) meta/header
 - [ ] Service Worker for offline caching (PWA)
 - [ ] Performance tuning: critical CSS, minification
-- [ ] Scroll-snap and custom scrollbar styling
+- [x] Scroll-snap and custom scrollbar styling
 - [ ] Structured data (JSON-LD) for better SEO
 - [ ] Automated accessibility and performance testing (Lighthouse/aXe)
 - [ ] Security headers (HSTS, X-Frame-Options, Referrer-Policy)
-- [ ] Image optimization pipeline (sharp, Squoosh, or build tool)
-- [ ] Font loading strategies (preload, preconnect, font-display)
-- [ ] Reduce gradients for cleaner design
+- [x] Image optimization pipeline (local ImageMagick script)
+- [x] Font loading strategies (preload, preconnect, font-display)
+- [x] Reduce gradients for cleaner design
 
 > Notes: You already use CSS hover effects; keep them consistent and accessible (don't rely solely on hover for essential interactions).
 
